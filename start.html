@@ -1,9 +1,74 @@
 <!DOCTYPE html>
-
+<html>
 <p id="test">
 </p>
+<h2>&#128507
+  &#10134
+  &#11093
+  &#11088
+  &#10160	
+  </h2>
 
-<body id = bdy style="background-color: aliceblue;">
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get User Location Map</title>
+<style>
+    /* Style for map container */
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+</style>
+</head>
+<body>
+    
+    <button onclick="getLocation()">Get My Location</button>
+    <div id="map"></div>
+
+
+
+<p id="demo"></p>
+
+<script>
+const x = document.getElementById("demo");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+  
+
+}
+
+function showPosition(position) {
+  let latlon = position.coords.latitude + "," + position.coords.longitude;
+
+  let img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false&key=YOUR_KEY";
+
+  document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
+  
+}
+
+</script>
+
+<body id = bdy style="background-color: aliceblue;"
+    onload="checkCookie()"></body>
+<meta http-equiv="refresh" content="100">
+<audio controls>
+    
+    <source src="rickroll.MP3" type="audio/mpeg">
+  Your browser does not support the audio element.
+  </audio>
     <button style="background-color: red;" onclick="document.getElementById('colors').style.color= 'red'">Red Text</button>
     <button style="background-color: green;" onclick="document.getElementById('colors').style.color='green'">Green Text</button>
     <button style="background-color: purple;" onclick="document.getElementById('colors').style.color='purple'">Purple Text</button>
@@ -29,8 +94,105 @@
     
 
 </marquee>
+
 <button onclick="document.getElementById('test').innerHTML= 'this is the button'" >Click me</button>
 <button onclick="document.getElementById('image').src='download.png'" >Click me 2</button>
+<p id=print></p>
+
 <script>
-    document.getElementById("test").innerHTML=("This is just a test")
+    function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  let expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function checkCookie() {
+  let user = getCookie("username");
+  if (user != "") {
+    alert("Welcome again " + user);
+  } else {
+    user = prompt("Please enter your name:", "");
+    if (user != "" && user != null) {
+      setCookie("username", user, 365);
+    }
+  }
+}
+
+
+// Function to get user's location
+function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showMap, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        // Function to show map with user's location
+        function showMap(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            // Create map centered at user's location
+            const map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: latitude, lng: longitude },
+                zoom: 15,
+                mapId: "DEMO_MAP_ID",
+              });
+
+            // Create marker showing user's location
+            const marker = new google.maps.marker.AdvancedMarkerElement({
+                position: { lat: latitude, lng: longitude },
+                map: map,
+                title: 'Your Location'
+            });
+        }
+
+        // Function to handle errors in geolocation
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+
+        
+   
+    
 </script>
+<!-- Include the Google Maps JavaScript API -->
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkvYDX_LXIzqmpeYlsLjpW9-lP0IzENO8&callback=initMap">
+</script>
+</head>
+
+
+</html>
+
+

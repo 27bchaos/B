@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get User Location Map</title>
+<style>
+    /* Style for map container */
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+</style>
+</head>
+<body>
+    <h2>Get Your Location Map</h2>
+    <button onclick="getLocation()">Get My Location</button>
+    <div id="map"></div>
+
+    <script>
+        // Function to get user's location
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showMap, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        // Function to show map with user's location
+        function showMap(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            // Create map centered at user's location
+            const map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: latitude, lng: longitude },
+                zoom: 15
+            });
+
+            // Create marker showing user's location
+            const marker = new google.maps.Marker({
+                position: { lat: latitude, lng: longitude },
+                map: map,
+                title: 'Your Location'
+            });
+        }
+
+        // Function to handle errors in geolocation
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+    </script>
+
+    <!-- Include the Google Maps JavaScript API -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkvYDX_LXIzqmpeYlsLjpW9-lP0IzENO8&callback=initMap">
+    </script>
+</body>
+</html>
