@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<p id="test">
+</p>
+
+<body id = bdy style="background-color: aliceblue;">
+    <button style="background-color: red;" onclick="document.getElementById('colors').style.color= 'red'">Red Text</button>
+    <button style="background-color: green;" onclick="document.getElementById('colors').style.color='green'">Green Text</button>
+    <button style="background-color: purple;" onclick="document.getElementById('colors').style.color='purple'">Purple Text</button>
+    <button style="background-color: yellow;" onclick="document.getElementById('colors').style.color='yellow'">Yellow Text</button>
+    <button style="background-color: blue;" onclick="document.getElementById('colors').style.color='blue'">Blue Text</button>
+    <button style="background-color: cyan;" onclick="document.getElementById('colors').style.color='cyan'">Cyan Text</button>
+    <button style="background-color: lavender;" onclick="document.getElementById('colors').style.color='lavender'">Lavender Text</button>
+    <button style="background-color: tan;" onclick="document.getElementById('colors').style.color='tan'">Tan Text</button>
+    
+
+    <button style="background-color: red;" onclick="document.getElementById('bdy').style.backgroundColor= 'red'">Red Background</button>
+    <button style="background-color: green;" onclick="document.getElementById('bdy').style.backgroundColor='green'">Green Background</button>
+    <button style="background-color: purple;" onclick="document.getElementById('bdy').style.backgroundColor='purple'">Purple Background</button>
+    <button style="background-color: yellow;" onclick="document.getElementById('bdy').style.backgroundColor='yellow'">Yellow Background</button>
+    <button style="background-color: blue;" onclick="document.getElementById('bdy').style.backgroundColor='blue'">Blue Background</button>
+    <button style="background-color: cyan;" onclick="document.getElementById('bdy').style.backgroundColor='cyan'">Cyan Background</button>
+    <button style="background-color: lavender;" onclick="document.getElementById('bdy').style.backgroundColor='lavender'">Lavender Background</button>
+    <button style="background-color: tan;" onclick="document.getElementById('bdy').style.backgroundColor='tan'">Tan Background</button>
+ 
+
+
+<marquee id="colors" style="color: brown;">This is a moving screen!
+    
+
+</marquee>
+<button onclick="document.getElementById('test').innerHTML= 'this is the button'" >Click me</button>
+<button onclick="document.getElementById('image').src='download.png'" >Click me 2</button>
+<script>
+    document.getElementById("test").innerHTML=("This is just a test")
+</script>
